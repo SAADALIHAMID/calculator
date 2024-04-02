@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+        }
+        .calculator {
+            margin: 100px auto;
+            width: 300px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        .output {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        button {
+            font-size: 20px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="output" id="output">0</div>
+        <div class="buttons">
+            <button onclick="clearOutput()">C</button>
+            <button onclick="appendToOutput('7')">7</button>
+            <button onclick="appendToOutput('8')">8</button>
+            <button onclick="appendToOutput('9')">9</button>
+            <button onclick="appendToOutput('4')">4</button>
+            <button onclick="appendToOutput('5')">5</button>
+            <button onclick="appendToOutput('6')">6</button>
+            <button onclick="appendToOutput('1')">1</button>
+            <button onclick="appendToOutput('2')">2</button>
+            <button onclick="appendToOutput('3')">3</button>
+            <button onclick="appendToOutput('0')">0</button>
+            <button onclick="appendToOutput('+')">+</button>
+            <button onclick="appendToOutput('-')">-</button>
+            <button onclick="appendToOutput('*')">*</button>
+            <button onclick="appendToOutput('/')">/</button>
+            <button onclick="calculateResult()">=</button>
+        </div>
+    </div>
+
+    <script>
+        let currentOutput = '0';
+
+        function updateOutput() {
+            document.getElementById('output').textContent = currentOutput;
+        }
+
+        function appendToOutput(value) {
+            if (currentOutput === '0') {
+                currentOutput = value;
+            } else {
+                currentOutput += value;
+            }
+            updateOutput();
+        }
+
+        function clearOutput() {
+            currentOutput = '0';
+            updateOutput();
+        }
+
+        function calculateResult() {
+            try {
+                currentOutput = eval(currentOutput);
+                updateOutput();
+            } catch (error) {
+                currentOutput = 'Error';
+                updateOutput();
+            }
+        }
+    </script>
+</body>
+</html>
